@@ -12,3 +12,4 @@
 /packer/packer_cache/*
 /packer/centOsKvm/output-qemu/
 /packer/centOsKvm/packer_cache/
+/packer/fedoraCoreOsKvm/packer_cache/
