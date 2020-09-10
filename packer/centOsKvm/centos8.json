@@ -1,0 +1,49 @@
+{
+  "variables": {
+      "boot_wait": "10s",
+      "disk_size": "120000",
+      "iso_checksum": "c67876a5602faa17f68b40ccf2628799b87454aa67700f0f57eec15c6ccdd98c",
+      "iso_url": "http://miroir.univ-paris13.fr/centos/8/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
+      "memsize": "4096",
+      "numvcpus": "4",
+      "ssh_password" : "packer",
+      "ssh_username" : "packer",
+      "vm_name": "CentOS-8-x86_64-2004"
+    },
+    "builders": [
+      {
+        "type": "qemu",
+        "format": "qcow2",
+        "accelerator": "kvm",
+        "net_device": "virtio-net",
+        "disk_interface": "virtio",
+        "disk_size": "{{ user `disk_size` }}",
+        "memory": "{{ user `memsize` }}",
+        "cpus": "{{ user `numvcpus` }}",
+        "boot_command": [
+           "<tab><bs><bs><bs><bs><bs>text ks=https://raw.githubusercontent.com/eaksel/packer-CentOS8/master/http/ks.cfg<enter><wait>"
+        ],
+        "boot_wait": "{{ user `boot_wait` }}",
+        "headless": false,
+        "iso_checksum": "{{ user `iso_checksum` }}",
+        "iso_url": "{{ user `iso_url` }}",
+        "shutdown_command": "echo 'packer'|sudo -S /sbin/halt -h -p",
+        "ssh_password": "{{ user `ssh_password` }}",
+        "ssh_port": 22,
+        "ssh_username": "{{ user `ssh_username` }}",
+        "ssh_timeout": "30m",
+        "vm_name": "{{ user `vm_name` }}"
+      }
+    ],
+    "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'packer'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "inline": [
+        "dnf -y update",
+        "dnf -y install python3",
+        "alternatives --set python /usr/bin/python3"
+      ]
+     }
+    ]
+}

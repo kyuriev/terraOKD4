@@ -8,5 +8,7 @@
 *.packer_cache
 /venv/
 /packer/packer_cache/
-/vsphere/.terraform/
+/kvm/.terraform/
 /packer/packer_cache/*
+/packer/centOsKvm/output-qemu/
+/packer/centOsKvm/packer_cache/
