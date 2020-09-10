@@ -1,6 +1,4 @@
-provider "ignition" {
-  version = "1.2.1"
-}
+
 ################################################################################
 # ENV VARS
 ################################################################################
@@ -45,23 +43,9 @@ resource "libvirt_volume" "fedoraCoreOs_image" {
   name = "fedoraCoreOs_image"
   pool = "default"
   #source = "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-qemu.x86_64.qcow2.xz"
-  source = "./fedora-coreos-32.20200824.3.0-qemu.x86_64.qcow2"
+  source = "../packer/output-qemu/fedoraCoreOs-packer.qcow2"
   format = "qcow2"
 }
-
-### Add user
-#resource "libvirt_cloudinit_disk" "commoninit" {
-#  name      = "commoninit.iso"
-#  user_data = data.template_file.user_data.rendered
-#}
-
-#data "template_file" "user_data" {
-#  template = file("${path.module}/cloud_init.cfg")
-#}
-###
-
-
-
 
 resource "libvirt_volume" "os_volume" {
   name           = "os_volume-${count.index}"
@@ -69,14 +53,12 @@ resource "libvirt_volume" "os_volume" {
   count          = var.VM_COUNT
 }
 
-
 # Define KVM domain to create
 resource "libvirt_domain" "vm" {
   count  = var.VM_COUNT
   name   = "${var.VM_HOSTNAME}-${count.index}"
   memory = "1024"
   vcpu   = 1
-
 
 
   network_interface {

@@ -9,3 +9,4 @@
 /venv/
 /packer/packer_cache/
 /vsphere/.terraform/
+/packer/packer_cache/*
