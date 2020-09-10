@@ -1,0 +1,11 @@
+.terraform
+*.tfstate
+*.tfstate.backup
+*.iso
+*.qcow2
+.idea
+.venv
+*.packer_cache
+/venv/
+/packer/packer_cache/
+/vsphere/.terraform/

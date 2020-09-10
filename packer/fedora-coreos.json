@@ -1,0 +1,32 @@
+{
+  "variables": {
+    "centos_password": "centos",
+    "version": "1908"
+  },
+
+  "builders": [
+    {
+      "type": "qemu",
+      "vm_name": "fedoraCoreOs-packer.qcow2",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "sha256:{{user `iso_checksum`}}",
+      "ssh_username": "kyuriev",
+      "ssh_private_key_file": "id_rsa",
+      "shutdown_command": "sudo /sbin/shutdown -P -h now",
+      "boot_command": [
+        "<enter>",
+        "<wait30s>",
+        "sudo /usr/bin/coreos-installer install -I {{user `ignition_url`}} {{user `ignition_hash`}} -u {{user `raw_url`}} /dev/sda",
+        "<enter>",
+        "<wait5m>",
+        "reboot",
+        "<enter>",
+        "<wait30s>"
+      ],
+      "boot_wait": "5s",
+      "headless": true,
+      "memory": 512,
+      "cpus": 1
+    }
+  ]
+}
