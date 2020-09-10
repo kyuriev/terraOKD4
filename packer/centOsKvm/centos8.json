@@ -21,7 +21,7 @@
         "memory": "{{ user `memsize` }}",
         "cpus": "{{ user `numvcpus` }}",
         "boot_command": [
-           "<tab><bs><bs><bs><bs><bs>text ks=https://raw.githubusercontent.com/eaksel/packer-CentOS8/master/http/ks.cfg<enter><wait>"
+           "<tab><bs><bs><bs><bs><bs>text ks=https://raw.githubusercontent.com/kyuriev/packer-CentOS8/master/http/ks.cfg<enter><wait>"
         ],
         "boot_wait": "{{ user `boot_wait` }}",
         "headless": false,

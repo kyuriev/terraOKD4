@@ -43,7 +43,6 @@ variable "libvirt_storage_pool_path" {
 
 ### LB
 variable "okd4-services_memory" {
-     description = "GB"
      default = "4096"
 }
 
