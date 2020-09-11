@@ -56,3 +56,15 @@ variable "okd4-services_disk" {
 variable "lb_vm_volume_source" {
      default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1809.qcow2"
 }
+
+variable "prefixIP" {
+  default = "192.168.122"
+}
+
+variable "octetIP" {
+  default = "250"
+}
+
+variable "domain" {
+  default = "example.com"
+}

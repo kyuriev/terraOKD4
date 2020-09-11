@@ -1,19 +1,21 @@
 ---
 - hosts: okd4_services
-  gather_facts: yes
   become: yes
+  gather_facts: yes
+
 
   vars_files:
     - vars.yml
 
   pre_tasks:
-    - name: Wait for server to restart
-      local_action:
-        module: wait_for
-          host={{ inventory_hostname }}
-          port=22
-          delay=10
-        become: false
+    - name: wait for host to finish reb00t
+      wait_for:
+        port: "{{ (ansible_port|default(ansible_ssh_port))|default(22) }}"
+        host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+        search_regex: OpenSSH
+        delay: 10  # Do not check for at least 10 sec
+      connection: local
+      become: no
 
     - name: upgrade all packages
       yum: name=* state=latest update_cache=yes
@@ -21,5 +23,33 @@
 
 
   roles:
-    - geerlingguy.firewall
     - geerlingguy.haproxy
+    - geerlingguy.apache
+
+  tasks:
+    - name: Configure open ports with firewalld.
+      firewalld:
+        state: "{{ item.state }}"
+        port: "{{ item.port }}"
+        zone: external
+        immediate: yes
+        permanent: yes
+      with_items:
+        - { state: 'enabled', port: '22/tcp' }
+        # HA_Proxy port 80 and 443
+        - { state: 'enabled', port: '80/tcp' }
+        - { state: 'enabled', port: '443/tcp' }
+        # Bind DNS port
+        - { state: 'enabled', port: '53/udp' }
+        # Apache port 8080
+        - { state: 'enabled', port: '8080/tcp' }
+        # OKD firewall ports
+        - { state: 'enabled', port: '6443/tcp' }
+        - { state: 'enabled', port: '22623/tcp' }
+
+    - name: "Install DNS (Bind and bind-utils"
+      dnf:
+        state: present
+        name:
+          - bind
+          - bind-utils

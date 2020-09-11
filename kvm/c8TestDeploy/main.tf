@@ -30,17 +30,17 @@ resource "libvirt_volume" "okd4-services-qcow2" {
 
 # cloudinit
 
-data "template_file" "network_config" {
- template = file("${path.module}/network_config.cfg")
-}
-
-
 data "template_file" "user_data" {
   template = file("${path.module}/cloud_init.cfg")
 }
 
 data "template_file" "network_config" {
   template = file("${path.module}/network_config.cfg")
+    vars = {
+    domain = var.domain
+    prefixIP = var.prefixIP
+    octetIP = var.octetIP
+  }
 }
 
 # for more info about paramater check this out
@@ -94,9 +94,10 @@ resource "libvirt_domain" "okd4-services" {
     autoport    = true
   }
 
+
       provisioner "local-exec" {
       command = <<EOF
-        ansible-playbook -i ../../provisioning/inventory ../../provisioning/okd4-services/main.yml -vvv
+        sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ../../provisioning/inventory ../../provisioning/okd4-services/main.yml
        EOF
    }
 }
