@@ -29,7 +29,7 @@ resource "libvirt_volume" "okd4-services-qcow2" {
 }
 
 resource "libvirt_domain" "okd4-services" {
-  name = "${var.cluster_name}-sevices"
+  name = "${var.cluster_name}-sevices-0"
   memory = var.okd4-services_memory
   vcpu = var.okd4-services_vcpu
 
@@ -37,7 +37,7 @@ resource "libvirt_domain" "okd4-services" {
   network_interface {
     network_name = "default"
     hostname       = "${var.cluster_name}-services.${var.network_domain}"
-    addresses      = [cidrhost(var.network_address,2)]
+    addresses      = [cidrhost(var.network_address,251)]
     wait_for_lease = true
 
   }
@@ -66,6 +66,12 @@ resource "libvirt_domain" "okd4-services" {
     listen_type = "address"
     autoport    = true
   }
+
+    provisioner "local-exec" {
+      command = <<EOF
+        ansible-playbook -i ./ansible/inventory ./ansible/tasks/haproxy_config.yml -vvv
+       EOF
+   }
 }
 
 #### Define and deploy CoreOs
@@ -89,13 +95,17 @@ resource "libvirt_volume" "os_volume" {
 #### Deploy working nodes
 resource "libvirt_domain" "vm" {
   count  = var.VM_COUNT
-  name   = "${var.VM_HOSTNAME}-${count.index}"
+  name   = "${var.cluster_name}-${var.VM_HOSTNAME}-${count.index+1}"
   memory = "1024"
   vcpu   = 1
 
 
   network_interface {
     network_name = "default"
+    hostname       = "${var.cluster_name}-control-plane-${count.index}.${var.network_domain}"
+    addresses      = [cidrhost(var.network_address,count.index+10)]
+    wait_for_lease = true
+
   }
 
   disk {

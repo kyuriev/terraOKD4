@@ -10,7 +10,7 @@ variable "VM_COUNT" {
 }
 
 variable "VM_HOSTNAME" {
-  default = "vm"
+  default = "control-plane"
   type = string
 }
 
@@ -44,11 +44,11 @@ variable "libvirt_storage_pool_path" {
 ### LB
 variable "okd4-services_memory" {
      description = "GB"
-     default = "4096"
+     default = "1096"
 }
 
 variable "okd4-services_vcpu" {
-     default = "4"
+     default = "1"
 }
 variable "okd4-services_disk" {
      description = "GB"
