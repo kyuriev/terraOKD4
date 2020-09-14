@@ -21,10 +21,27 @@
       yum: name=* state=latest update_cache=yes
       when: ansible_os_family == "RedHat"
 
+    - name: Ensure required SELinux dependency is installed.
+      package:
+        name: python3-libsemanage
+        state: present
+
+    - name: Set haproxy_connect_any flag on and keep it persistent across reboots
+      seboolean:
+        name: haproxy_connect_any
+        state: yes
+        persistent: yes
+
+    - name: Set httpd_read_user_content flag on and keep it persistent across reboots
+      seboolean:
+        name: httpd_read_user_content
+        state: yes
+        persistent: yes
 
   roles:
     - geerlingguy.haproxy
     - geerlingguy.apache
+
 
   tasks:
     - name: Configure open ports with firewalld.
@@ -47,18 +64,14 @@
         - { state: 'enabled', port: '6443/tcp' }
         - { state: 'enabled', port: '22623/tcp' }
 
-    - name: "Install DNS (Bind and bind-utils"
-      dnf:
-        state: present
-        name:
-          - bind
-          - bind-utils
+    - name: Configure and run Bind service
+      import_tasks: tasks/apacheConfig.yml
 
-    - name: "apache2 listen on port 8080"
-      lineinfile: dest=/etc/httpd/conf/httpd.conf regexp="^Listen 80" line="Listen 8080" state=present
-      notify:
-        - restart apache2
+    - name: Configure and run Bind service
+      import_tasks: tasks/bindDnsConfig.yml
 
-  handlers:
-    - name: restart apache2
-      service: name=httpd state=restarted
+    - name: Configure and run HAPROXY
+      import_tasks: tasks/haproxyConfig.yml
+
+
+

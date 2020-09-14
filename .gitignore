@@ -5,6 +5,7 @@
 *.qcow2
 .idea
 .venv
+*.venv
 *.packer_cache
 /venv/
 /packer/packer_cache/

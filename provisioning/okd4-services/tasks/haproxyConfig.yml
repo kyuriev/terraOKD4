@@ -1,0 +1,9 @@
+---
+
+- name: Copy config HAPROXY files in place.
+  copy:
+    src: files/haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    mode: '0644'
+
+

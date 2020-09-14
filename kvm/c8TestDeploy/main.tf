@@ -65,7 +65,7 @@ resource "libvirt_domain" "okd4-services" {
   network_interface {
     network_name = "default"
     hostname  = "centos8-test"
-    addresses = ["192.168.122.250"]
+    addresses = ["192.168.122.210"]
   }
 
   # IMPORTANT: this is a known bug on cloud images, since they expect a console

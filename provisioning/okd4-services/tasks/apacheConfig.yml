@@ -1,0 +1,12 @@
+---
+- name: Ensure the SSL Apache port is 54443
+  lineinfile:
+    path: /etc/httpd/conf.d/ssl.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: Listen 54443 https
+
+- name: reload service httpd, in all cases
+  systemd:
+    name: httpd
+    state: reloaded
