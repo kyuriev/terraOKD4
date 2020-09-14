@@ -21,10 +21,11 @@
       yum: name=* state=latest update_cache=yes
       when: ansible_os_family == "RedHat"
 
-    - name: Ensure required SELinux dependency is installed.
-      package:
-        name: python3-libsemanage
-        state: present
+    - name: Ensure required packeages is installed.
+      dnf:
+        name:
+          - python3-libsemanage
+        state: latest
 
     - name: Set haproxy_connect_any flag on and keep it persistent across reboots
       seboolean:
@@ -41,6 +42,7 @@
   roles:
     - geerlingguy.haproxy
     - geerlingguy.apache
+    - resolv.conf
 
 
   tasks:
