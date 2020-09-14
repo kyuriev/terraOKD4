@@ -50,7 +50,7 @@
       firewalld:
         state: "{{ item.state }}"
         port: "{{ item.port }}"
-        zone: external
+        zone: public
         immediate: yes
         permanent: yes
       with_items:
