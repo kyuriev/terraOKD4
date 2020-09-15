@@ -25,6 +25,9 @@
       dnf:
         name:
           - python3-libsemanage
+          - curl
+          - tar
+          - rsync
         state: latest
 
     - name: Set haproxy_connect_any flag on and keep it persistent across reboots
@@ -38,6 +41,9 @@
         name: httpd_read_user_content
         state: yes
         persistent: yes
+
+    - name: Configure and run Bind service
+      import_tasks: tasks/bindDnsConfig.yml
 
   roles:
     - geerlingguy.haproxy
@@ -69,11 +75,12 @@
     - name: Configure and run Bind service
       import_tasks: tasks/apacheConfig.yml
 
-    - name: Configure and run Bind service
-      import_tasks: tasks/bindDnsConfig.yml
-
     - name: Configure and run HAPROXY
       import_tasks: tasks/haproxyConfig.yml
+
+    - name: Configure OKD
+      import_tasks: tasks/okdConfig.yml
+
 
 
 

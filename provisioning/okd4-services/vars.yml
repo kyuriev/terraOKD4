@@ -5,3 +5,13 @@ resolv_nameservers:
   - 127.0.0.1
 resolv_domain: example.com
 resolv_search: okd4.local
+#
+# OKD vars
+okd_client_url: "https://github.com/openshift/okd/releases/download/4.5.0-0.okd-2020-09-04-180756/openshift-client-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz"
+okd_installer_url: "https://github.com/openshift/okd/releases/download/4.5.0-0.okd-2020-09-04-180756/openshift-install-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz"
+okd_manifest_folder: "/root/install_dir/"
+okd_bin_folder: "/usr/local/bin/"
+okd_web_folder: "/var/www/html/okd4op"
+system_web_folder: "/var/www/html/"
+fedora_coreos_img: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz"
+fedora_coreos_sig: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz.sig"

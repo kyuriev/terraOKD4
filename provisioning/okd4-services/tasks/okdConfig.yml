@@ -1,0 +1,106 @@
+---
+#- name: Download and check hash OKD installer
+#  get_url:
+#    url: https://github.com/openshift/okd/releases/download/4.5.0-0.okd-2020-09-04-180756/openshift-install-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz
+#    dest: /tmp/openshift-install-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz
+#    mode: 0755
+#    checksum: sha256:742e47bd3b09e2338158f4a10c16ec596221edde6cb7224de38634e6a6cf2c7b
+#
+#- name: Download and check hash OKD client.
+#  get_url:
+#    url: https://github.com/openshift/okd/releases/download/4.5.0-0.okd-2020-09-04-180756/openshift-client-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz
+#    dest: /tmp/openshift-client-linux-4.5.0-0.okd-2020-09-04-180756.tar.gz
+#    mode: 0755
+#    checksum: sha256:b70e7bbee507802a414e0c7ca50f9edaf500c078370e31a3e2e38aa702c34947
+
+# TODO Skip downloading if files exists
+
+- name: Download and unarchive OKD installer and client
+  unarchive:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+    remote_src: yes
+  with_items:
+    - src: "{{ okd_installer_url }}"
+      dst: "{{ okd_bin_folder }}"
+    - src: "{{ okd_client_url }}"
+      dst: /root/
+
+- name: Clear a directory where we create Kubernetes manifest
+  file:
+    path: "{{ okd_manifest_folder }}"
+    state: absent
+
+- name: Create a directory where we create Kubernetes manifest
+  file:
+    path: "{{ okd_manifest_folder }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy install-config.yaml in place.
+  copy:
+    src: files/install-config.yaml
+    dest: "{{ okd_manifest_folder }}"
+    mode: '0644'
+
+- name: Generate the Kubernetes manifests for the cluster, ignore the warning
+  command: >
+    /usr/local/bin/openshift-install create manifests --dir=/root/install_dir/
+
+- name: Prevent Pods from being scheduled on the control plane machines
+  lineinfile:
+    path: "{{ okd_manifest_folder }}manifests/cluster-scheduler-02-config.yml"
+    regexp: '^mastersSchedulable: '
+    insertafter: '^#mastersSchedulable: '
+    line: "mastersSchedulable: False"
+
+- name: Create the ignition-configs
+  command: >
+    /usr/local/bin/openshift-install create ignition-configs --dir=/root/install_dir/
+
+- name: Create okd4 directory in /var/www/html
+  file:
+    path: "{{ okd_web_folder }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy initial CoreOs config from install_dir to web folder
+# Synchronize two directories on one remote host.
+  synchronize:
+    src: "{{ okd_manifest_folder }}"
+    dest: "{{ okd_web_folder }}"
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Download the Fedora CoreOS bare-metal BIOS image
+  get_url:
+    url: "{{ fedora_coreos_img }}"
+    dest: "{{ okd_web_folder }}/fcos.raw.xz"
+    mode: 0755
+
+- name: Download the Fedora CoreOS bare-metal BIOS image sig files
+  get_url:
+    url: "{{ fedora_coreos_sig }}"
+    dest: "{{ okd_web_folder }}/fcos.raw.xz.sig"
+    mode: 0755
+    # checksum: sha256:b70e7bbee507802a414e0c7ca50f9edaf500c078370e31a3e2e38aa702c34947
+
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ system_web_folder }}"
+    state: directory
+    recurse: yes
+    owner: apache
+
+- name: Change file ownership, group and permissions
+  file:
+    path: "{{ system_web_folder }}"
+    owner: apache
+    mode: '0755'
+    recurse: yes
+
+- name: Check avalabale files on web server
+  command: >
+    curl localhost:8080/okd4/metadata.json
+  register: web_output
+
+- debug: var=web_output.stdout

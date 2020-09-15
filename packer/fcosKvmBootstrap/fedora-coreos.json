@@ -1,0 +1,36 @@
+{
+  "variables": {
+    "centos_password": "centos",
+    "version": "1908"
+  },
+
+  "builders": [
+    {
+      "type": "qemu",
+      "vm_name": "fedoraCoreOs-packer.qcow2",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "sha256:{{user `iso_checksum`}}",
+      "disk_size": "10000M",
+      "format": "qcow2",
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "memory": 2000,
+      "cpus": 1,
+      "ssh_username": "kyuriev",
+      "ssh_private_key_file": "/home/kyuriev/.ssh/id_rsa",
+      "shutdown_command": "sudo /sbin/shutdown -P -h now",
+      "boot_command": [
+        "<enter>",
+        "<wait30s>",
+        "sudo /usr/bin/coreos-installer install --insecure-ignition --ignition-url http://192.168.122.210:8080/okd4/bootstrap.ign --image-url http://192.168.122.210:8080/okd4/fcos.raw.xz /dev/vda",
+        "<enter>",
+        "<wait2m>",
+        "reboot",
+        "<enter>",
+        "<wait30s>"
+      ],
+      "boot_wait": "5s"
+    }
+  ]
+}

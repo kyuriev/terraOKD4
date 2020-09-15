@@ -43,7 +43,7 @@ variable "libvirt_storage_pool_path" {
 
 ### LB
 variable "okd4-services_memory" {
-     default = "4096"
+     default = "1024"
 }
 
 variable "okd4-services_vcpu" {
@@ -62,7 +62,7 @@ variable "prefixIP" {
 }
 
 variable "octetIP" {
-  default = "250"
+  default = "210"
 }
 
 variable "domain" {

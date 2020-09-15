@@ -1,0 +1,30 @@
+apiVersion: v1
+baseDomain: okd.local
+metadata:
+  name: lab
+
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+
+platform:
+  none: {}
+
+fips: false
+
+pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+sshKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDfqBKiG1KlIrqDR6joUQutGbIpvlgqgqmbT8eykOPrYBg+VWtnwUpon5/+ueRI0gHrJZtGvWw0b5WituOZ6I15wJSAwhx/q4bcUdN4KQGg0uSKcLmwPIyKeEnDgMbsZfiRgLhbiTjl0J+KJM8pve8McXplxIscRE57t/W1G7uOiK+9OEgXwcsFaNb6ayqspJQ6bMmrKcNR1jRjrkz3Z48Qrs8XCrF/PT5rfX7FlQbuGBC4CxeohPZPH3BNyasD3uA3l7MlegGDSgPP1AtX4erQziXpBV0o3AzhEnjCudxP2GwlO15vdSyjbqYmaYXceEATZt/SWJpiagK0pLWci17FPihXywOqg1BdB9hnYbBPtlYSIPGlXBZPztpwNdaN9NcdsJtBiKjOnZfUjdXi2lRHISJ2teOF5g1G9YUYyuOZdmKW3KTnMJ+DQfLtSCZwDzm/7KGncr57LZlW4uhxk5xV9DE1mSmdJczQvbOXI6M03w+GgmtS5YzBiJxp3qJLCR1h45+UHLJLtgUDDvIDJRrU7RgYkq4+JxPbn+leSD30Mnac6wnheXsV9CjFvUpnOVgmf9pZLmCvdFxltk4fTCuPW8eDctwG4WWo2AmErqn/jRR5EGceZDmPHVB8Yt0TdjZNvQ3RZIsgNLA8GP8gV/IOSmdUy8Tv+S+jP6gVgxkwjw== kyuriev@localhost.localdomain'
