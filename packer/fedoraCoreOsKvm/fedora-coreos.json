@@ -25,7 +25,7 @@
         "<wait30s>",
         "sudo /usr/bin/coreos-installer install -I {{user `ignition_url`}} {{user `ignition_hash`}} -u {{user `raw_url`}} /dev/vda",
         "<enter>",
-        "<wait5m>",
+        "<wait2m>",
         "reboot",
         "<enter>",
         "<wait30s>"

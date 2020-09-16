@@ -5,12 +5,12 @@
 
 # https://www.terraform.io/docs/commands/environment-variables.html
 variable "VM_COUNT" {
-  default = 3
+  default = 0
   type = number
 }
 
 variable "VM_HOSTNAME" {
-  default = "control-plane"
+  default = "okd4-bootstrap"
   type = string
 }
 
@@ -44,7 +44,7 @@ variable "libvirt_storage_pool_path" {
 ### LB
 variable "okd4-services_memory" {
      description = "GB"
-     default = "1096"
+     default = "2048"
 }
 
 variable "okd4-services_vcpu" {
@@ -52,7 +52,7 @@ variable "okd4-services_vcpu" {
 }
 variable "okd4-services_disk" {
      description = "GB"
-     default = "120"
+     default = "12"
 }
 variable "lb_vm_volume_source" {
      default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1809.qcow2"

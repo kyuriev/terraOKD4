@@ -15,22 +15,21 @@
       "accelerator": "kvm",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
-      "memory": 2000,
-      "cpus": 1,
-      "ssh_username": "kyuriev",
+      "memory": 4096,
+      "cpus": 4,
+      "net_bridge": "virbr0",
+      "ssh_username": "core",
       "ssh_private_key_file": "/home/kyuriev/.ssh/id_rsa",
+      "ssh_host": "192.168.122.200",
       "shutdown_command": "sudo /sbin/shutdown -P -h now",
       "boot_command": [
+        "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/bootstrap.ign ip=192.168.122.200::192.168.122.1:255.255.255.0:okd4-bootstrap.lab.okd.local:ens3:none nameserver=192.168.122.210<enter><wait>",
         "<enter>",
-        "<wait30s>",
-        "sudo /usr/bin/coreos-installer install --insecure-ignition --ignition-url http://192.168.122.210:8080/okd4/bootstrap.ign --image-url http://192.168.122.210:8080/okd4/fcos.raw.xz /dev/vda",
-        "<enter>",
-        "<wait2m>",
+        "<wait45m>",
         "reboot",
-        "<enter>",
-        "<wait30s>"
+        "<enter>"
       ],
-      "boot_wait": "5s"
+      "boot_wait": "1s"
     }
   ]
 }

@@ -51,7 +51,7 @@
   lineinfile:
     path: "{{ okd_manifest_folder }}manifests/cluster-scheduler-02-config.yml"
     regexp: '^mastersSchedulable: '
-    insertafter: '^#mastersSchedulable: '
+    # insertafter: '^#mastersSchedulable: '
     line: "mastersSchedulable: False"
 
 - name: Create the ignition-configs
