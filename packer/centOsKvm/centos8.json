@@ -1,11 +1,11 @@
 {
   "variables": {
       "boot_wait": "10s",
-      "disk_size": "12000",
+      "disk_size": "30000",
       "iso_checksum": "c67876a5602faa17f68b40ccf2628799b87454aa67700f0f57eec15c6ccdd98c",
       "iso_url": "http://miroir.univ-paris13.fr/centos/8/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
-      "memsize": "1024",
-      "numvcpus": "1",
+      "memsize": "4096",
+      "numvcpus": "4",
       "ssh_password" : "packer",
       "ssh_username" : "kyuriev",
       "vm_name": "CentOS-8-x86_64-2004"

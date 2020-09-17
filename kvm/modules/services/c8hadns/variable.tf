@@ -43,7 +43,7 @@ variable "libvirt_storage_pool_path" {
 
 ### LB
 variable "okd4-services_memory" {
-     default = "1024"
+     default = "4096"
 }
 
 variable "okd4-services_vcpu" {
@@ -51,7 +51,7 @@ variable "okd4-services_vcpu" {
 }
 variable "okd4-services_disk" {
      description = "GB"
-     default = "120"
+     default = "30"
 }
 variable "lb_vm_volume_source" {
      default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1809.qcow2"
