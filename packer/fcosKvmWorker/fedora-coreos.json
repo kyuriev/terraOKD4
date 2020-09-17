@@ -20,6 +20,9 @@
       "net_bridge": "virbr0",
       "ssh_username": "core",
       "ssh_private_key_file": "/home/kor/.ssh/id_rsa",
+      "qemuargs": [
+                ["-display", "vnc=127.0.0.1:12"]
+            ],
       "shutdown_command": "sudo /sbin/shutdown -P -h now",
       "boot_command": [
         "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/worker.ign ip=192.168.122.204::192.168.122.1:255.255.255.0:worker-1.okd4.local:ens3:none nameserver=192.168.122.210<enter><wait>",
