@@ -10,7 +10,7 @@
       "vm_name": "fedoraCoreOs-packer.qcow2",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "sha256:{{user `iso_checksum`}}",
-      "disk_size": "10000M",
+      "disk_size": "160000M",
       "format": "qcow2",
       "accelerator": "kvm",
       "net_device": "virtio-net",
@@ -25,7 +25,7 @@
       "boot_command": [
         "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/bootstrap.ign ip=192.168.122.200::192.168.122.1:255.255.255.0:okd4-bootstrap.lab.okd.local:ens3:none nameserver=192.168.122.210<enter><wait>",
         "<enter>",
-        "<wait45m>",
+        "<wait25m>",
         "reboot",
         "<enter>"
       ],

@@ -43,7 +43,7 @@ variable "libvirt_storage_pool_path" {
 
 ### LB
 variable "okd4-bootstrap_memory" {
-     default = "2048"
+     default = "4096"
 }
 
 variable "okd4-bootstrap_vcpu" {

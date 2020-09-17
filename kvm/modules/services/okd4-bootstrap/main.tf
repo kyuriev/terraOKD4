@@ -17,14 +17,6 @@ resource "libvirt_domain" "okd4-services" {
     network_name = "default"
   }
 
-  # IMPORTANT: this is a known bug on cloud images, since they expect a console
-  # we need to pass it
-  # https://bugs.launchpad.net/cloud-images/+bug/1573095
-  console {
-    type = "pty"
-    target_port = "0"
-    target_type = "serial"
-  }
 
   console {
     type = "pty"
