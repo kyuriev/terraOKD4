@@ -1,7 +1,7 @@
 {
   "variables": {
       "boot_wait": "10s",
-      "disk_size": "30000M",
+      "disk_size": "30000",
       "iso_checksum": "c67876a5602faa17f68b40ccf2628799b87454aa67700f0f57eec15c6ccdd98c",
       "iso_url": "http://miroir.univ-paris13.fr/centos/8/isos/x86_64/CentOS-8.2.2004-x86_64-boot.iso",
       "memsize": "4096",
@@ -12,7 +12,7 @@
     },
     "builders": [
       {
-        "qemu_binary": "qemu-img",
+        "qemu_binary": "/usr/libexec/qemu-kvm",
         "type": "qemu",
         "format": "qcow2",
         "accelerator": "kvm",
@@ -25,7 +25,7 @@
            "<tab><bs><bs><bs><bs><bs>text ks=https://raw.githubusercontent.com/kyuriev/terraOKD4/master/packer/centOsKvm/http/ks.cfg<enter><wait>"
         ],
         "boot_wait": "{{ user `boot_wait` }}",
-        "headless": true,
+        "headless": false,
         "iso_checksum": "{{ user `iso_checksum` }}",
         "iso_url": "{{ user `iso_url` }}",
         "shutdown_command": "echo 'packer'|sudo -S /sbin/halt -h -p",
