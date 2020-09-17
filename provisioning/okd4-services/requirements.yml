@@ -4,4 +4,3 @@ roles:
   - name: geerlingguy.firewall
   - name: geerlingguy.apache
   - name: geerlingguy.haproxy
-  - name: linux-system-roles.network,v1.2.0
