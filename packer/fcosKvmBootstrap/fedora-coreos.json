@@ -19,7 +19,7 @@
       "cpus": 4,
       "net_bridge": "virbr0",
       "ssh_username": "core",
-      "ssh_private_key_file": "/home/kyuriev/.ssh/id_rsa",
+      "ssh_private_key_file": "/home/kor/.ssh/id_rsa",
       "ssh_host": "192.168.122.200",
       "shutdown_command": "sudo /sbin/shutdown -P -h now",
       "boot_command": [
