@@ -33,6 +33,9 @@
         "ssh_port": 22,
         "ssh_username": "{{ user `ssh_username` }}",
         "ssh_timeout": "30m",
+        "qemuargs": [
+                ["-display", "vnc=127.0.0.1:10"]
+            ],
         "vm_name": "{{ user `vm_name` }}"
       }
     ],
