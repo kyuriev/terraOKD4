@@ -6,6 +6,7 @@
 
   "builders": [
     {
+      "qemu_binary": "/usr/libexec/qemu-kvm",
       "type": "qemu",
       "vm_name": "fedoraCoreOs-packer.qcow2",
       "iso_url": "{{user `iso_url`}}",
