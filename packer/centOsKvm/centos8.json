@@ -25,7 +25,7 @@
            "<tab><bs><bs><bs><bs><bs>text ks=https://raw.githubusercontent.com/kyuriev/terraOKD4/master/packer/centOsKvm/http/ks.cfg<enter><wait>"
         ],
         "boot_wait": "{{ user `boot_wait` }}",
-        "headless": false,
+        "headless": true,
         "iso_checksum": "{{ user `iso_checksum` }}",
         "iso_url": "{{ user `iso_url` }}",
         "shutdown_command": "echo 'packer'|sudo -S /sbin/halt -h -p",
