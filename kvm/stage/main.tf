@@ -26,6 +26,4 @@ module "c8hadns" {
   source = "../modules/services/c8hadns"
 }
 
-module "okd4-bootstrap" {
-  source = "../modules/services/okd4-bootstrap"
-}
+## Add bootstrap module
