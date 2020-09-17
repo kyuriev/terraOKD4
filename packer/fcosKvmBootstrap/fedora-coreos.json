@@ -1,7 +1,5 @@
 {
   "variables": {
-    "centos_password": "centos",
-    "version": "1908",
     "disk_size": "120000"
   },
 
