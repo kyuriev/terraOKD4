@@ -52,25 +52,52 @@
 
 
   tasks:
-    - name: Configure open ports with firewalld.
+#    - name: Configure open ports with firewalld.
+#      firewalld:
+#        state: "{{ item.state }}"
+#        port: "{{ item.port }}"
+#        zone: public
+#        immediate: yes
+#        permanent: yes
+#      with_items:
+#        - { state: 'enabled', port: '22/tcp' }
+#        # HA_Proxy port 80 and 443
+#        - { state: 'enabled', port: '80/tcp' }
+#        - { state: 'enabled', port: '443/tcp' }
+#        # Bind DNS port
+#        - { state: 'enabled', port: '53/udp' }
+#        # Apache port 8080
+#        - { state: 'enabled', port: '8080/tcp' }
+#        # OKD firewall ports
+#        - { state: 'enabled', port: '6443/tcp' }
+#        - { state: 'enabled', port: '22623/tcp' }
+
+    - name: Open up firewall ports
       firewalld:
-        state: "{{ item.state }}"
-        port: "{{ item.port }}"
         zone: public
-        immediate: yes
         permanent: yes
+        immediate: yes
+        state: enabled
+        port: "{{ item }}"
       with_items:
-        - { state: 'enabled', port: '22/tcp' }
-        # HA_Proxy port 80 and 443
-        - { state: 'enabled', port: '80/tcp' }
-        - { state: 'enabled', port: '443/tcp' }
-        # Bind DNS port
-        - { state: 'enabled', port: '53/udp' }
-        # Apache port 8080
-        - { state: 'enabled', port: '8080/tcp' }
-        # OKD firewall ports
-        - { state: 'enabled', port: '6443/tcp' }
-        - { state: 'enabled', port: '22623/tcp' }
+        - 22/tcp
+        - 67/udp
+        - 53/tcp
+        - 53/udp
+        - 443/tcp
+        - 80/tcp
+        - 8080/tcp
+        - 6443/tcp
+        - 6443/udp
+        - 22623/tcp
+        - 22623/udp
+        - 9000/tcp
+        - 69/udp
+        - 111/tcp
+        - 2049/tcp
+        - 20048/tcp
+        - 50825/tcp
+        - 53248/tcp
 
     - name: Configure and run Bind service
       import_tasks: tasks/apacheConfig.yml
