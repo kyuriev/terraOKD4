@@ -41,7 +41,7 @@
     ],
     "provisioners": [
     {
-      "execute_command": "echo 'packer' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "execute_command": "echo 'P0ckeR' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "type": "shell",
       "inline": [
         "dnf -y update",
