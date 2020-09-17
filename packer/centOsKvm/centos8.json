@@ -42,7 +42,6 @@
     "provisioners": [
     {
       "type": "shell",
-      "execute_command": "echo 'packer'|{{.Vars}} sudo -S -E bash '{{.Path}}'",
       "inline": [
         "dnf -y update",
         "dnf -y install python3",
