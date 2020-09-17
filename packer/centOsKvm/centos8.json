@@ -41,8 +41,8 @@
     ],
     "provisioners": [
     {
-      "execute_command": "echo 'P0ckeR' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "type": "shell",
+      "execute_command": "echo 'P0ckeR' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "inline": [
         "dnf -y update",
         "dnf -y install python3",
