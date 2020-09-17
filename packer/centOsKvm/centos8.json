@@ -12,6 +12,7 @@
     },
     "builders": [
       {
+        "qemu_binary": "qemu-img",
         "type": "qemu",
         "format": "qcow2",
         "accelerator": "kvm",
