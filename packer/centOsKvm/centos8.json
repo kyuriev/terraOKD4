@@ -16,7 +16,7 @@
         "type": "qemu",
         "format": "qcow2",
         "accelerator": "kvm",
-        "net_device": "virtio-net",
+        "net_device": "virtio",
         "disk_interface": "virtio",
         "disk_size": "{{ user `disk_size` }}",
         "memory": "{{ user `memsize` }}",
