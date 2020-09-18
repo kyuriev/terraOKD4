@@ -7,7 +7,7 @@
     {
       "qemu_binary": "/usr/libexec/qemu-kvm",
       "type": "qemu",
-      "vm_name": "fcos-master.qcow2",
+      "vm_name": "fcos-master-3.qcow2",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "sha256:{{user `iso_checksum`}}",
       "disk_size": "{{ user `disk_size` }}",
@@ -20,14 +20,14 @@
       "net_bridge": "virbr0",
       "ssh_username": "core",
       "ssh_private_key_file": "/home/kor/.ssh/id_rsa",
-      "ssh_host": "192.168.122.201",
+      "ssh_host": "192.168.122.203",
       "qemuargs": [
                 ["-display", "vnc=127.0.0.1:11"]
             ],
       "shutdown_command": "sudo /sbin/shutdown -P -h now",
       "boot_wait": "1s",
       "boot_command": [
-        "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/master.ign ip=192.168.122.201::192.168.122.1:255.255.255.0:okd4-control-plane-1.lab.okd.local:ens3:none nameserver=192.168.122.210<enter><wait>",
+        "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/master.ign ip=192.168.122.203::192.168.122.1:255.255.255.0:okd4-control-plane-1.lab.okd.local:ens3:none nameserver=192.168.122.210<enter><wait>",
         "<enter>",
         "<wait10m>",
         "reboot",
