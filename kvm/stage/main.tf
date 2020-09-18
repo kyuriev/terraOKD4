@@ -29,7 +29,6 @@ module "c8hadns" {
 ## Add bootstrap module
 module "okd4-bootstrap" {
   source = "../modules/services/okd4-bootstrap"
-  depends_on = [module.c8hadns]
 }
 
 ## Add bootstrap module
