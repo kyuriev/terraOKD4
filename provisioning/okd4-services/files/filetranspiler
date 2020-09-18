@@ -1,0 +1,27 @@
+cat < bootstrap/etc/sysconfig/network-scripts/ifcfg-ens1
+
+DEVICE=ens1
+
+BOOTPROTO=none
+
+ONBOOT=yes
+
+IPADDR=192.168.122.200
+
+NETMASK=255.255.255.0
+
+GATEWAY=192.168.122.1
+
+DNS1=192.168.122.210
+
+DNS2=192.168.122.211
+
+DOMAIN=okd.local
+
+PREFIX=24
+
+DEFROUTE=yes
+
+IPV6INIT=no
+
+EOF
