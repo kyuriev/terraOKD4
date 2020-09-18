@@ -2,7 +2,7 @@
 resource "libvirt_volume" "okd4-master-qcow2" {
   name = "okd4-bootstrap.qcow2"
   pool = "default"
-  source = "../../packer/fcosKvmMaster-1/output-qemu/fedoraCoreOs-packer.qcow2"
+  source = "../../packer/fcosKvmMaster-1/output-qemu/fcos-master.qcow2"
   format = "qcow2"
 }
 
