@@ -33,7 +33,6 @@ module "okd4-bootstrap" {
 }
 
 ## Add bootstrap module
-module "okd4-master1" {
+module "okd4-master-1" {
   source = "../modules/services/okd4-master-1"
-  depends_on = [module.c8hadns]
 }
