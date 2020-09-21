@@ -95,7 +95,7 @@ resource "libvirt_domain" "okd4-services" {
 
       provisioner "local-exec" {
       command = <<EOF
-        sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ../../provisioning/inventory ../../provisioning/okd4-services/main.yml
+        sleep 120; ANSIBLE_ROLES_PATH=/path/to/roles ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ../../provisioning/inventory ../../provisioning/okd4-services/main.yml
        EOF
    }
 }
