@@ -13,7 +13,7 @@
       "disk_size": "{{ user `disk_size` }}",
       "format": "qcow2",
       "accelerator": "kvm",
-      "net_device": "virtio",
+      "net_device": "virtio-net",
       "disk_interface": "virtio",
       "memory": 16000,
       "cpus": 4,
