@@ -49,10 +49,10 @@
 
 - name: Prevent Pods from being scheduled on the control plane machines
   lineinfile:
-    path: "{{ okd_manifest_folder }}manifests/cluster-scheduler-02-config.yml"
+    path: /root/install_dir/manifests/cluster-scheduler-02-config.yml
     regexp: '^mastersSchedulable: '
     # insertafter: '^#mastersSchedulable: '
-    line: "mastersSchedulable: False"
+    line: "mastersSchedulable: false"
 
 - name: Create the ignition-configs
   command: >
