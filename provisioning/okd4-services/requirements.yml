@@ -4,3 +4,4 @@ roles:
   - name: geerlingguy.firewall
   - name: geerlingguy.apache
   - name: geerlingguy.haproxy
+  - name: geerlingguy.nfs
