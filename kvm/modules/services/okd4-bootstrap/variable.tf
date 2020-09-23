@@ -43,7 +43,7 @@ variable "libvirt_storage_pool_path" {
 
 ### LB
 variable "okd4-bootstrap_memory" {
-     default = "16000"
+     default = "32000"
 }
 
 variable "okd4-bootstrap_vcpu" {
@@ -70,5 +70,13 @@ variable "domain" {
 }
 
 variable "vnc_server_port" {
-  default = "5901"
+  default = "5902"
+}
+
+variable "vnc_password" {
+  default = "test"
+}
+
+variable "vnc_server_host" {
+  default = "test"
 }

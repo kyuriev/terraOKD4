@@ -1,0 +1,10 @@
+---
+- name: Create NFS share
+  file:
+    path: "{{ nfs_folder }}"
+    state: directory
+    mode: '0755'
+
+- name: Confirm that the NFS folder is exported
+  command: >
+    /usr/sbin/exportfs/exportfs -v

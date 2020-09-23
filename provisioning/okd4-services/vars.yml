@@ -1,8 +1,11 @@
 ---
+# Roles variable
 apache_listen_port: 8080
 apache_listen_port_ssl: 9443
 resolv_nameservers:
   - 127.0.0.1
+
+nfs_exports: [ "/var/nfsshare 192.168.122.0/24(rw,sync,no_root_squash,no_wdelay)"
 resolv_domain: example.com
 resolv_search: okd4.local
 #
@@ -15,3 +18,4 @@ okd_web_folder: "/var/www/html/okd4"
 system_web_folder: "/var/www/html/"
 fedora_coreos_img: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz"
 fedora_coreos_sig: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz.sig"
+nfs_folder: "/var/nfsshare"

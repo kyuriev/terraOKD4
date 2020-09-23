@@ -42,12 +42,19 @@
         state: yes
         persistent: yes
 
+    - name: Allow in selinux nfs shares
+      seboolean:
+        name: nfs_export_all_rw
+        state: yes
+        persistent: yes
+
     - name: Configure and run Bind service
       import_tasks: tasks/bindDnsConfig.yml
 
   roles:
     - geerlingguy.haproxy
     - geerlingguy.apache
+    - geerlingguy.nfs
     - resolv.conf
 
 
@@ -99,14 +106,17 @@
         - 50825/tcp
         - 53248/tcp
 
-    - name: Configure and run Bind service
+    - name: Configure and run APACHE
       import_tasks: tasks/apacheConfig.yml
 
     - name: Configure and run HAPROXY
       import_tasks: tasks/haproxyConfig.yml
 
-    - name: Configure OKD
-      import_tasks: tasks/okdConfig.yml
+#    - name: Configure OKD
+#      import_tasks: tasks/okdConfig.yml
+
+    - name: Configure NFS
+      import_tasks: tasks/nfsShare.yml
 
 
 

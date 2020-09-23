@@ -25,7 +25,7 @@
             ],
       "shutdown_command": "sudo /sbin/shutdown -P -h now",
       "boot_command": [
-        "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/worker.ign ip=192.168.122.204::192.168.122.1:255.255.255.0:worker-1.okd4.local:ens3:none nameserver=192.168.122.210<enter><wait>",
+        "<tab> coreos.inst.install_dev=/dev/vda coreos.inst.image_url=http://192.168.122.210:8080/okd4/fcos.raw.xz coreos.inst.ignition_url=http://192.168.122.210:8080/okd4/worker.ign ip=192.168.122.204::192.168.122.1:255.255.255.0:okd4-compute-1.lab.okd.local:enp1s0:none nameserver=192.168.122.210<enter><wait>",
         "<enter>",
         "<wait25m>",
         "reboot",
