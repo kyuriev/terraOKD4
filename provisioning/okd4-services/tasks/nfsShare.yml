@@ -7,4 +7,4 @@
 
 - name: Confirm that the NFS folder is exported
   command: >
-    /usr/sbin/exportfs/exportfs -v
+    /usr/sbin/exportfs -v
