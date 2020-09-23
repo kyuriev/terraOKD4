@@ -5,7 +5,7 @@ apache_listen_port_ssl: 9443
 resolv_nameservers:
   - 127.0.0.1
 
-nfs_exports: "/var/nfsshare 192.168.122.0/24(rw,sync,no_root_squash,no_wdelay)"
+nfs_exports: [ "/var/nfsshare 192.168.122.0/24(rw,sync,no_root_squash,no_wdelay)" ]
 resolv_domain: example.com
 resolv_search: okd4.local
 #
