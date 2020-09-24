@@ -1,0 +1,15 @@
+vrrp_instance {{ keepalived_vrrp_instance_name }} {
+  interface                 {{ ansible_default_ipv4['interface'] }}
+  state                     {{ keepalived_state }}
+  virtual_router_id         {{ keepalived_vrid }}
+  priority                  {{ keepalived_priority }}
+
+  authentication {
+     auth_type {{ keepalived_auth_type }}
+     auth_pass {{ keepalived_auth_pass }}
+  }
+
+  virtual_ipaddress {
+    {{ keepalived_vip }} dev {{ ansible_default_ipv4['interface'] }} label {{ ansible_default_ipv4['interface'] }}:VIP
+  }
+}

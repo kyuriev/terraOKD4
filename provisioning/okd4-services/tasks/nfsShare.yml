@@ -3,7 +3,29 @@
   file:
     path: "{{ nfs_folder }}"
     state: directory
-    mode: '0755'
+    mode: '0777'
+
+- name: Create NFS share
+  file:
+    path: "{{ nfs_folder }}/registry"
+    state: directory
+    mode: '0777'
+
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ nfs_folder }}"
+    state: directory
+    recurse: yes
+    owner: nobody
+    group: nobody
+
+- name: Change file ownership, group and permissions
+  file:
+    path: "{{ nfs_folder }}"
+    owner: nobody
+    group: nobody
+    mode: '0777'
+    recurse: yes
 
 - name: Confirm that the NFS folder is exported
   command: >

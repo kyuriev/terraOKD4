@@ -28,6 +28,7 @@
           - curl
           - tar
           - rsync
+          - keepalived
         state: latest
 
     - name: Set haproxy_connect_any flag on and keep it persistent across reboots
