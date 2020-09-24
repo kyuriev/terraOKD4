@@ -116,6 +116,9 @@
 
 
 - hosts: helper1
+  become: yes
+  gather_facts: yes
+
   tasks:
     - name: Configure and run Bind service
       import_tasks: tasks/bindDnsMasterConfig.yml
