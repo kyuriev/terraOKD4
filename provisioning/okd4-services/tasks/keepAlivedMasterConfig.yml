@@ -2,7 +2,7 @@
 - name: Add Keepalived config file
   template:
     dest: /etc/keepalived/keepalived.conf
-    src: etc/keepalived/keepalived.conf.j2
+    src: template/keepalived.conf.j2
 
 - name: Restart keepalive
   systemd:
