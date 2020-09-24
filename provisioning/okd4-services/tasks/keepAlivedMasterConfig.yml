@@ -1,5 +1,5 @@
 ---
-- name: Add Keepalived config file
+- name: Add Keepalived MASTER config file
   template:
     dest: /etc/keepalived/keepalived.conf
     src: template/keepalived.conf.j2

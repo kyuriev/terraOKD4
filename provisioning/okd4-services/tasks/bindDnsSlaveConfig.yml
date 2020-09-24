@@ -1,0 +1,50 @@
+---
+- name: "Install DNS (Bind and bind-utils)"
+  dnf:
+    name:
+      - bind
+      - bind-utils
+    state: present
+
+- name: Copy config Bind file named.conf in place.
+  copy:
+    src: files/named.conf
+    dest: /etc/named.conf
+    mode: '0644'
+
+- name: Copy config Bind file named.conf.local in place.
+  copy:
+    src: files/named.conf.local
+    dest: /etc/named/
+    mode: '0644'
+
+- name: Create a directory with bind zones
+  file:
+    path: /etc/named/zones
+    state: directory
+    mode: '0755'
+
+- name: Copy config Bind file db.192.168.122 in place.
+  copy:
+    src: files/db.192.168.122
+    dest: /etc/named/zones/
+    mode: '0644'
+
+- name: Copy config Bind file db.192.168.122 in place.
+  copy:
+    src: files/db.okd.local
+    dest: /etc/named/zones/
+    mode: '0644'
+
+- name: Restarted Bind
+  systemd:
+    name: named
+    state: restarted
+
+- name: enable a Bind service
+  systemd:
+    name: named
+    state: started
+    enabled: yes
+
+
