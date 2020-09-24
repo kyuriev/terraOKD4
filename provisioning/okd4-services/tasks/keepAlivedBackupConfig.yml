@@ -1,9 +1,9 @@
 ---
 gather_facts: yes
 vars:
-  keepalived_priority: 200
-  keepalived_state: MASTER
-  keepalived_vip: 192.168.122.212
+  keepalived_priority: 100
+  keepalived_state: BACKUP
+  keepalived_vip: 192.168.122.12
   keepalived_vrid: 10
   keepalived_vrrp_instance_name: "HA_10"
   keepalived_auth_type: "PASS"
