@@ -52,6 +52,9 @@
     - name: Configure and run Bind service
       import_tasks: tasks/bindDnsConfig.yml
 
+    - name: Configure and run keepAlived
+      import_tasks: task/keepAlivedConfig.yml
+
   roles:
     - geerlingguy.haproxy
     - geerlingguy.apache
