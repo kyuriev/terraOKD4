@@ -49,11 +49,6 @@
         state: yes
         persistent: yes
 
-    - name: Configure and run Bind service
-      import_tasks: tasks/bindDnsConfig.yml
-
-    - name: Configure and run keepAlived
-      import_tasks: tasks/keepAlivedConfig.yml
 
   roles:
     - geerlingguy.haproxy
@@ -116,12 +111,19 @@
     - name: Configure and run HAPROXY
       import_tasks: tasks/haproxyConfig.yml
 
-#    - name: Configure OKD
-#      import_tasks: tasks/okdConfig.yml
-
     - name: Configure NFS
       import_tasks: tasks/nfsShare.yml
 
 
+- hosts: helper1
+  tasks:
+    - name: Configure and run Bind service
+      import_tasks: tasks/bindDnsMasterConfig.yml
+
+    - name: Configure and run keepAlived
+      import_tasks: tasks/keepAlivedMasterConfig.yml
+
+    #    - name: Configure OKD
+    #      import_tasks: tasks/okdConfig.yml
 
 
