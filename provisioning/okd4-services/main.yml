@@ -121,6 +121,14 @@
       import_tasks: tasks/bindDnsMasterConfig.yml
 
     - name: Configure and run keepAlived
+      vars:
+        keepalived_priority: 200
+        keepalived_state: MASTER
+        keepalived_vip: 192.168.122.12
+        keepalived_vrid: 10
+        keepalived_vrrp_instance_name: "HA_10"
+        keepalived_auth_type: "PASS"
+        keepalived_auth_pass: "1011"
       import_tasks: tasks/keepAlivedMasterConfig.yml
 
     #    - name: Configure OKD

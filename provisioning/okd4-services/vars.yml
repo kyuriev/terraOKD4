@@ -19,3 +19,5 @@ system_web_folder: "/var/www/html/"
 fedora_coreos_img: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz"
 fedora_coreos_sig: "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20200824.3.0/x86_64/fedora-coreos-32.20200824.3.0-metal.x86_64.raw.xz.sig"
 nfs_folder: "/var/nfsshare"
+
+# Keepalived var

@@ -1,22 +1,10 @@
 ---
-gather_facts: yes
-vars:
-  keepalived_priority: 200
-  keepalived_state: MASTER
-  keepalived_vip: 192.168.122.212
-  keepalived_vrid: 10
-  keepalived_vrrp_instance_name: "HA_10"
-  keepalived_auth_type: "PASS"
-  keepalived_auth_pass: "1011"
-tasks:
-  - name: Add Keepalived config file
-    template:
-      dest: /etc/keepalived/keepalived.conf
-      src: etc/keepalived/keepalived.conf.j2
-    notify: Restart Keepalived
+- name: Add Keepalived config file
+  template:
+    dest: /etc/keepalived/keepalived.conf
+    src: etc/keepalived/keepalived.conf.j2
 
-handlers:
-  - name: Restart Keepalived
-    service:
-      name: keepalived
-      state: restarted
+- name: Restart keepalive
+  systemd:
+    name: keepalived
+    state: restarted
